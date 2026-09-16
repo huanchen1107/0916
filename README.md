@@ -4,6 +4,7 @@ A modern cyberpunk dark glassmorphic personal page featuring a live real-time di
 
 🔗 **Live Demo**: [https://huanchen1107.github.io/0916/](https://huanchen1107.github.io/0916/)
 
+![Live Demo Preview](demo_preview.png)
 
 ## 🚀 Features
 
