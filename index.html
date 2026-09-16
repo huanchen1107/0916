@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Huan Chen (陳煥) | AIoT 2026 Personal Page</title>
+  <meta name="description" content="Personal portfolio and live time dashboard for Huan Chen (陳煥), AIoT Engineer & Developer.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Interactive Particle Canvas -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- Ambient Glow Orbs -->
+  <div class="ambient-orb orb-cyan" aria-hidden="true"></div>
+  <div class="ambient-orb orb-purple" aria-hidden="true"></div>
+  <div class="ambient-orb orb-blue" aria-hidden="true"></div>
+
+  <!-- Main Page Wrapper -->
+  <div class="page-wrapper">
+    
+    <!-- Top Navigation Bar -->
+    <header class="top-nav">
+      <div class="nav-brand">
+        <span class="brand-badge">AIoT // 2026</span>
+        <span class="brand-divider">/</span>
+        <span class="brand-sub">NODE_HC.01</span>
+      </div>
+
+      <div class="nav-controls">
+        <div class="status-indicator" title="System status is operational">
+          <span class="status-dot"></span>
+          <span class="status-text">SYSTEM ONLINE</span>
+        </div>
+
+        <button id="format-toggle-btn" class="nav-btn" title="Toggle 12H / 24H time format">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span id="format-label">24H</span>
+        </button>
+
+        <button id="quick-edit-btn" class="nav-btn" title="Edit Profile Details">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 20h9"></path>
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+          </svg>
+          <span>Edit Profile</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Hero Header & Identity -->
+      <section class="hero-identity-section">
+        <div class="greeting-pill" id="dynamic-greeting-pill">
+          <span id="greeting-icon" class="greeting-icon">✨</span>
+          <span id="greeting-text" class="greeting-text">GOOD MORNING, EXPLORER</span>
+        </div>
+
+        <div class="profile-card glass-panel">
+          <div class="profile-avatar-wrapper">
+            <div class="avatar-glow"></div>
+            <div class="avatar-circle">
+              <span class="avatar-initials">HC</span>
+            </div>
+            <span class="avatar-status-badge" title="Active in AIoT Lab">●</span>
+          </div>
+
+          <div class="profile-info">
+            <div class="name-row">
+              <h1 id="user-name" class="user-name">Huan Chen (陳煥)</h1>
+              <button id="inline-rename-btn" class="icon-action-btn" title="Change name" aria-label="Change display name">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                </svg>
+              </button>
+            </div>
+            <p id="user-role" class="user-role">AIoT Engineer & Developer • 物聯網與智慧系統探索者</p>
+            <div class="profile-badges">
+              <span class="spec-badge">Artificial Intelligence of Things</span>
+              <span class="spec-badge">Embedded Systems</span>
+              <span class="spec-badge">Edge Computing</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HERO CLOCK WIDGET -->
+      <section class="clock-hero-section">
+        <div class="clock-card glass-panel glow-card">
+          <div class="clock-card-header">
+            <div class="clock-label">
+              <svg class="chip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+              <span>REAL-TIME LOCAL TELEMETRY</span>
+            </div>
+            <div class="clock-actions">
+              <button id="copy-time-btn" class="pill-btn" title="Copy ISO Timestamp">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Copy Time</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Digital Clock Display -->
+          <div class="digital-clock-face" id="clock-face">
+            <div class="time-digits-group">
+              <div class="digit-box" id="box-hours">
+                <span id="clock-hours" class="time-digit">00</span>
+                <span class="digit-sublabel">HOURS</span>
+              </div>
+              <span class="colon-pulse">:</span>
+              <div class="digit-box" id="box-minutes">
+                <span id="clock-minutes" class="time-digit">00</span>
+                <span class="digit-sublabel">MINUTES</span>
+              </div>
+              <span class="colon-pulse">:</span>
+              <div class="digit-box" id="box-seconds">
+                <span id="clock-seconds" class="time-digit highlight-cyan">00</span>
+                <span class="digit-sublabel">SECONDS</span>
+              </div>
+            </div>
+            <div class="period-container" id="period-container">
+              <span id="clock-period" class="period-badge">AM</span>
+            </div>
+          </div>
+
+          <!-- Calendar & Metadata Display -->
+          <div class="clock-footer-meta">
+            <div class="date-display-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              <span id="clock-date" class="clock-date-text">Loading local calendar...</span>
+            </div>
+
+            <div class="meta-tags-row">
+              <div class="meta-chip">
+                <span class="chip-dot"></span>
+                <span id="clock-timezone">Asia/Taipei (UTC+8)</span>
+              </div>
+              <div class="meta-chip" id="day-progress-chip" title="Percentage of day elapsed">
+                <span class="chip-label">DAY PROGRESS:</span>
+                <span id="day-progress-val">0%</span>
+                <div class="mini-progress-bar">
+                  <div class="mini-progress-fill" id="day-progress-fill" style="width: 0%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Highlights & Focus Cards Grid -->
+      <section class="dashboard-grid">
+        
+        <!-- Card 1: About Me & Background -->
+        <article class="grid-card glass-panel">
+          <div class="card-header">
+            <div class="card-title-wrap">
+              <div class="card-icon-box cyan-glow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+              <h3>About Huan Chen</h3>
+            </div>
+            <span class="card-badge">Profile</span>
+          </div>
+          <div class="card-body">
+            <p class="card-lead">
+              Passionate engineer exploring the convergence of <strong>Artificial Intelligence</strong>, <strong>Internet of Things (IoT)</strong>, and <strong>Embedded Edge Computing</strong>.
+            </p>
+            <p class="card-text">
+              Building intelligent physical interfaces, sensor telemetry pipelines, and low-latency decision systems designed for resilient, real-world deployment.
+            </p>
+            <div class="stat-pills-row">
+              <div class="stat-pill">
+                <span class="stat-number">2026</span>
+                <span class="stat-caption">Cohort</span>
+              </div>
+              <div class="stat-pill">
+                <span class="stat-number">Edge AI</span>
+                <span class="stat-caption">Specialization</span>
+              </div>
+              <div class="stat-pill">
+                <span class="stat-number">100%</span>
+                <span class="stat-caption">Curiosity</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2: AIoT 2026 Focus Areas -->
+        <article class="grid-card glass-panel">
+          <div class="card-header">
+            <div class="card-title-wrap">
+              <div class="card-icon-box purple-glow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+              </div>
+              <h3>AIoT 2026 Focus Pillars</h3>
+            </div>
+            <span class="card-badge">Curriculum & Research</span>
+          </div>
+          <div class="card-body">
+            <ul class="focus-list">
+              <li class="focus-item">
+                <div class="focus-bullet cyan"></div>
+                <div class="focus-content">
+                  <strong>Embedded Edge ML & TinyML</strong>
+                  <span>Running quantized neural nets on microcontrollers and neural accelerators.</span>
+                </div>
+              </li>
+              <li class="focus-item">
+                <div class="focus-bullet purple"></div>
+                <div class="focus-content">
+                  <strong>Sensor Networks & Telemetry</strong>
+                  <span>MQTT, WebSockets, Bluetooth LE, and multi-node sensor synchronization.</span>
+                </div>
+              </li>
+              <li class="focus-item">
+                <div class="focus-bullet blue"></div>
+                <div class="focus-content">
+                  <strong>Intelligent Automation</strong>
+                  <span>Closed-loop physical cyber-systems, computer vision, and autonomous telemetry.</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Card 3: Skills & Tech Arsenal -->
+        <article class="grid-card glass-panel">
+          <div class="card-header">
+            <div class="card-title-wrap">
+              <div class="card-icon-box blue-glow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+              </div>
+              <h3>Technical Arsenal</h3>
+            </div>
+            <span class="card-badge">Competencies</span>
+          </div>
+          <div class="card-body">
+            <div class="skills-cluster">
+              <span class="skill-tag"><span class="skill-dot"></span>C / C++</span>
+              <span class="skill-tag"><span class="skill-dot"></span>Python</span>
+              <span class="skill-tag"><span class="skill-dot"></span>ESP32 / Arduino</span>
+              <span class="skill-tag"><span class="skill-dot"></span>FreeRTOS</span>
+              <span class="skill-tag"><span class="skill-dot"></span>TensorFlow Lite / TinyML</span>
+              <span class="skill-tag"><span class="skill-dot"></span>MQTT & CoAP</span>
+              <span class="skill-tag"><span class="skill-dot"></span>JavaScript / Web</span>
+              <span class="skill-tag"><span class="skill-dot"></span>Linux / Docker</span>
+              <span class="skill-tag"><span class="skill-dot"></span>Computer Vision</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 4: Node Health & Hardware Telemetry Simulation -->
+        <article class="grid-card glass-panel">
+          <div class="card-header">
+            <div class="card-title-wrap">
+              <div class="card-icon-box green-glow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                </svg>
+              </div>
+              <h3>Live Node Diagnostics</h3>
+            </div>
+            <span class="card-badge pulse-badge">ACTIVE LINK</span>
+          </div>
+          <div class="card-body">
+            <div class="telemetry-grid">
+              <div class="telemetry-item">
+                <span class="telemetry-label">GATEWAY LATENCY</span>
+                <span class="telemetry-value highlight-green" id="telemetry-latency">14 ms</span>
+              </div>
+              <div class="telemetry-item">
+                <span class="telemetry-label">CPU CLOCK FREQ</span>
+                <span class="telemetry-value">240 MHz</span>
+              </div>
+              <div class="telemetry-item">
+                <span class="telemetry-label">MEMORY BUFFER</span>
+                <span class="telemetry-value">94.8% OK</span>
+              </div>
+              <div class="telemetry-item">
+                <span class="telemetry-label">TELEMETRY STREAM</span>
+                <span class="telemetry-value highlight-cyan">1000 Hz Live</span>
+              </div>
+            </div>
+            <div class="telemetry-chart-bar" aria-hidden="true">
+              <div class="sparkline-bar"></div>
+              <div class="sparkline-bar"></div>
+              <div class="sparkline-bar"></div>
+              <div class="sparkline-bar"></div>
+              <div class="sparkline-bar"></div>
+              <div class="sparkline-bar"></div>
+              <div class="sparkline-bar"></div>
+              <div class="sparkline-bar"></div>
+              <div class="sparkline-bar"></div>
+              <div class="sparkline-bar"></div>
+              <div class="sparkline-bar"></div>
+              <div class="sparkline-bar"></div>
+            </div>
+          </div>
+        </article>
+
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+      <div class="footer-left">
+        <p>© 2026 <strong>Huan Chen (陳煥)</strong> • AIoT Laboratory</p>
+        <p class="footer-subtext">Designed with modern dark glassmorphism & live browser telemetry</p>
+      </div>
+      <div class="footer-right">
+        <button id="reset-profile-btn" class="footer-btn">Reset Profile to Default</button>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast" class="toast" role="alert" aria-live="polite">
+    <span id="toast-icon">✓</span>
+    <span id="toast-message">Timestamp copied to clipboard!</span>
+  </div>
+
+  <!-- Edit Profile Modal -->
+  <div id="edit-modal" class="modal-overlay" aria-hidden="true">
+    <div class="modal-card glass-panel">
+      <div class="modal-header">
+        <h3>Customize Profile</h3>
+        <button id="modal-close-btn" class="modal-close-btn" aria-label="Close modal">×</button>
+      </div>
+      <form id="edit-profile-form" class="modal-form">
+        <div class="form-group">
+          <label for="input-name">Your Full / Display Name</label>
+          <input type="text" id="input-name" placeholder="e.g. Huan Chen (陳煥)" required maxlength="40">
+        </div>
+        <div class="form-group">
+          <label for="input-role">Role & Tagline</label>
+          <input type="text" id="input-role" placeholder="e.g. AIoT Engineer & Developer" required maxlength="80">
+        </div>
+        <div class="modal-actions">
+          <button type="button" id="modal-cancel-btn" class="secondary-btn">Cancel</button>
+          <button type="submit" class="primary-btn">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
