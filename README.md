@@ -2,6 +2,9 @@
 
 A modern cyberpunk dark glassmorphic personal page featuring a live real-time digital clock, dynamic context-aware greetings, and AIoT 2026 focus highlights.
 
+🔗 **Live Demo**: [https://huanchen1107.github.io/0916/](https://huanchen1107.github.io/0916/)
+
+
 ## 🚀 Features
 
 - **Live Real-Time Digital Clock**: Millisecond-accurate clock with live seconds, 12H/24H toggle, full localized calendar date, timezone display, and daily elapsed progress bar.
